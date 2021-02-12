@@ -1,21 +1,18 @@
-def call(body) {
-def config = [:]
-    body.resolveStrategy = Closure.DELEGATE_FIRST
-    body.delegate = config
-    body()
-
-    node {
+def call(body = null) {
+    pipeline {
         agent any
-       
-		stage ('Clone') {
-	        	checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], 				submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/kumaranraj2895/maven-demo-jib']]])
-	        }
-            	stage('Build') {
-                        	body() : BuildStep()
+        stages {
+            stage('Build') {
+                steps {
+                    script {
+                        body != null ? body() : PostBuildStep()
                     }
-    	}
+                }
+            }
+        }
+    }
 }
 
-def BuildStep() {
-    sh 'maven clean install -f pom.xml'
+def PostBuildStep() {
+    echo 'Running default post-build step';
 }
