@@ -1,15 +1,11 @@
 def call(body = null) {
-    pipeline {
+    node {
         agent any
-        stages {
             stage('Build') {
-                steps {
                     script {
                         body != null ? body() : PostBuildStep()
                     }
-                }
             }
-        }
     }
 }
 
