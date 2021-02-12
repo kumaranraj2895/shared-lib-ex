@@ -2,9 +2,7 @@ def call(body = null) {
     node {
         agent any
             stage('Build') {
-                    script {
                         body != null ? body() : PostBuildStep()
-                    }
             }
     }
 }
