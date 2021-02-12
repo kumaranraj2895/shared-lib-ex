@@ -1,4 +1,9 @@
-def call(body = null) {
+def call(def body = null) {
+def config = [:]
+    body.resolveStrategy = Closure.DELEGATE_FIRST
+    body.delegate = config
+    body()
+
     node {
         agent any
        
