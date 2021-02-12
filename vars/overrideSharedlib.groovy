@@ -1,4 +1,4 @@
-def call(def body = null) {
+def call(body) {
 def config = [:]
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = config
@@ -11,8 +11,8 @@ def config = [:]
 	        	checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], 				submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/kumaranraj2895/maven-demo-jib']]])
 	        }
             	stage('Build') {
-                        		body != null ? body() : BuildStep()
-                    	}
+                        	body() : BuildStep()
+                    }
     	}
 }
 
