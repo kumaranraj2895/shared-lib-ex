@@ -1,3 +1,4 @@
-def call(String name = 'Kumaran'){
-    echo "Hello, ${name}."
+def college(String name, String student = 'yes'){
+    println(name)
+    println(student)
 }
