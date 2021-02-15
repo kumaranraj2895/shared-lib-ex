@@ -1,4 +1,4 @@
 def college(String name, String student = 'yes'){
-    println(name)
-    println(student)
+    println("Names is" + name)
+    println("Is" + name + "a Student" + student)
 }
